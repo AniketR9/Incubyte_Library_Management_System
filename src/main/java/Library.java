@@ -45,4 +45,10 @@ public class Library {
         }
         book.returnBook();
     }
+    
+    public void viewAvailableBooks() {
+        for (Book book : books.values()) {
+            System.out.println(book);
+        }
+    }
 }

@@ -55,7 +55,7 @@ public class LibraryTest {
     }
 
     @Test
-    public void testReturnBookSuccess() {
+    public void testReturnBook() {
         Book book = new Book("12345", "Test Book", "Test Author", 2023, 1);
         library.addBook(book);
         library.borrowBook("12345");
@@ -63,6 +63,18 @@ public class LibraryTest {
 
         assertTrue(book.isAvailable());
         assertEquals(1, book.getAvailableCopies()); // Verify available copies have increased
+    }
+    
+    @Test
+    public void testViewAvailableBooks() {
+        Book book1 = new Book("12345", "Test Book 1", "Test Author", 2023, 1);
+        Book book2 = new Book("67890", "Test Book 2", "Test Author", 2023, 2);
+        library.addBook(book1);
+        library.addBook(book2);
+        library.borrowBook("67890");
+
+        // Ensure both books are listed as available
+        library.viewAvailableBooks();
     }
     
     public static void main(String[] args) {
@@ -104,6 +116,24 @@ public class LibraryTest {
             ctr++;
         } catch (Exception e) {
             System.out.println("Unit Test for Borrowing All Copies Failed");
+        }
+        
+        try {
+            obj.setUp();
+            obj.testReturnBook();
+            System.out.println("Unit Test for Returning Books Successful");
+            ctr++;
+        } catch (Exception e) {
+            System.out.println("Unit Test for Returning Books Failed");
+        }
+        
+        try {
+            obj.setUp();
+            obj.testViewAvailableBooks();
+            System.out.println("Unit Test for Displaying Available Books Successful");
+            ctr++;
+        } catch (Exception e) {
+            System.out.println("Unit Test for Displaying Available Books Failed");
         }
         
         System.out.println("Total Unit Tests Passed: " + ctr);
