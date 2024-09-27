@@ -32,6 +32,16 @@ public class LibraryTest {
         assertEquals(5, storedBook.getAvailableCopies()); // Ensure available copies have increased
     }
     
+    @Test
+    public void testBorrowBook() {
+        Book book = new Book("12345", "Test Book", "Test Author", 2023, 3);
+        library.addBook(book);
+        library.borrowBook("12345");
+
+        assertEquals(2, book.getAvailableCopies()); // Check if available copies decrease
+        assertTrue(book.isAvailable()); // Still available because copies remain
+    }
+    
     public static void main(String[] args) {
         LibraryTest obj = new LibraryTest();
         int ctr = 0; // to count the number of tests passed
@@ -46,6 +56,23 @@ public class LibraryTest {
             System.out.println("Unit Test for Adding Books Failed");
         }
 
+        try {
+            obj.setUp();
+            obj.testAddingDuplicateBook();
+            System.out.println("Unit Test for Duplicate Book Handling Successful");
+            ctr++;
+        } catch (Exception e) {
+            System.out.println("Unit Test for Duplicate Book Handling Failed");
+        }
+        
+        try {
+            obj.setUp();
+            obj.testBorrowBook();
+            System.out.println("Unit Test for Borrowing Books with Multiple Copies Successful");
+            ctr++;
+        } catch (Exception e) {
+            System.out.println("Unit Test for Borrowing Books with Multiple Copies Failed");
+        }
         
         System.out.println("Total Unit Tests Passed: " + ctr);
     }
