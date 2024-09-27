@@ -37,4 +37,12 @@ public class Library {
     {
         return books.get(isbn);
     }
+    
+    public void returnBook(String isbn) {
+        Book book = books.get(isbn);
+        if (book == null) {
+            throw new IllegalArgumentException("Book not found.");
+        }
+        book.returnBook();
+    }
 }

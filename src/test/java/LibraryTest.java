@@ -54,6 +54,16 @@ public class LibraryTest {
         assertEquals(0, book.getAvailableCopies()); // All copies borrowed
     }
 
+    @Test
+    public void testReturnBookSuccess() {
+        Book book = new Book("12345", "Test Book", "Test Author", 2023, 1);
+        library.addBook(book);
+        library.borrowBook("12345");
+        library.returnBook("12345");
+
+        assertTrue(book.isAvailable());
+        assertEquals(1, book.getAvailableCopies()); // Verify available copies have increased
+    }
     
     public static void main(String[] args) {
         LibraryTest obj = new LibraryTest();
