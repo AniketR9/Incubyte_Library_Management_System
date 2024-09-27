@@ -21,4 +21,20 @@ public class Library {
             books.put(book.getIsbn(), book);
         }
     }
+    
+    public void borrowBook(String isbn) {
+        Book book = books.get(isbn);
+        if (book == null) {
+            throw new IllegalArgumentException("Book not found.");
+        }
+        if (!book.isAvailable()) {
+            throw new IllegalStateException("No available copies to borrow.");
+        }
+        book.borrowBook();
+    }
+    
+    public Book getBookByISBN(String isbn)
+    {
+        return books.get(isbn);
+    }
 }
